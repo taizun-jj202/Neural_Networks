@@ -8,4 +8,4 @@ Each Neural Network is stored inside its own folder containing a explanation for
 Check README.md inside the folder of the NN for code explanation.
 
 Created Neural Nets:
-1. [Digit Recognizer]([https://github.com](https://github.com/taizun-jj202/Neural_Networks/tree/digit_recog/Handwriting_Digit_Recognition_NN))
+1. [Digit Recognizer](https://github.com](https://github.com/taizun-jj202/Neural_Networks/tree/digit_recog/Handwriting_Digit_Recognition_NN)
