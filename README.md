@@ -9,3 +9,5 @@ Check README.md inside the folder of each NN for code explanation.
 
 Created Neural Nets:
 1. [Handwriting_Digit_Recognition_MNIST](https://github.com/taizun-jj202/Neural_Networks/tree/digit_recog/Handwriting_Digit_Recognition_NN)
+2. [KNN](https://github.com/taizun-jj202/Neural_Networks/tree/algorithms/KNN)
+3. [Linear_Regression Algorithm](https://github.com/taizun-jj202/Neural_Networks/tree/algorithms/Linear_Regression)
