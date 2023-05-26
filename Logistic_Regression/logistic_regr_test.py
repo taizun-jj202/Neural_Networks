@@ -1,7 +1,6 @@
 import numpy as np
 from sklearn.model_selection import train_test_split
 from sklearn import datasets
-import matplotlib as plt
 from logistic_regression import log_regr
 
 data = datasets.load_breast_cancer()
