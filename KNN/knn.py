@@ -12,6 +12,7 @@ class KNN:
         self.x_train = x
         self.y_train = y
 
+
     def predict(self, X):   # Takes in multiples samples so for 1 sample, we usehelper method _predict()
         predicted_labels = [self._predict(element) for element in X]
         return np.array(predicted_labels)

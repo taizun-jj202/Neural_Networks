@@ -36,7 +36,7 @@ for k in range(1, 21,1):
 
 
 # Plotting kvalues vs accuracy_values
-plt.scatter(k_values, accuracy_values)
+plt.plot(k_values, accuracy_values)
 plt.xlabel("Accuracy")
 plt.ylabel("'k'")
 plt.title("Optimal Values of 'k' to Accuracy")
