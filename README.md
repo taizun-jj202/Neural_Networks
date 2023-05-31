@@ -12,3 +12,8 @@ Created Neural Nets:
 2. [K-Nearest Neighbour](https://github.com/taizun-jj202/Neural_Networks/tree/algorithms/KNN)
 3. [Linear_Regression Algorithm](https://github.com/taizun-jj202/Neural_Networks/tree/algorithms/Linear_Regression)
 4. [Logistic_Regression Algorithm](https://github.com/taizun-jj202/Neural_Networks/tree/algorithms/Logistic_Regression)
+5. [Naive_Bayes Algorithm]
+6. [Logistic Regression using PyTorch]
+7. [Support Vector Machine]
+8. [Transfer Learning]
+9. [Applying transfer learning on CIFAR10 Dataset]
