@@ -1,5 +1,6 @@
 import torch
 import torch.nn as nn
+from sympy import im
 from torch.utils.data import DataLoader
 import torch.nn.functional as F
 import torchvision.datasets as datasets
@@ -76,7 +77,7 @@ optimizer = torch.optim.Adam(model.parameters(), lr = learning_rate)
 # Saving and loading previous state/weights of model
 checkpoint_params = {'state': model.state_dict(),
                      'optimizer': optimizer.state_dict()}
-def save_checkpoint(state, file='state.pth.tar'):
+def save_checkpoint(state, file='cifar10.pth'):
     print("--------- Saving checkpoint ---------")
     torch.save(state, file)
 
@@ -100,7 +101,7 @@ def train():
             optimizer.zero_grad()
             loss.backward()
             optimizer.step()
-    # save_checkpoint(checkpoint_params)
+    save_checkpoint(checkpoint_params)
     print("------------------------------------")
     print("...Finished training the model...")
     print("------------------------------------")
@@ -138,6 +139,7 @@ def validate():
 
 
 train()
+# torch.load("./cifar10.pth")
 validate()
 
 
