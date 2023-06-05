@@ -76,10 +76,12 @@ def model_train():
     print("Initializing model training")
     print("-----------------------------------------------")
     for epoch in range(num_epochs):
-        for batch in train_batches:
-            imgs = batch[:, 1:].to(device)
-            labels = torch.unsqueeze(batch[:, 0], dim=1).to(device)
-            imgs, labels = imgs.to(device), labels.to(device)
+        for i in train_batches:
+            # imgs = batch[:, 1:].to(device)
+            imgs = train_set[:, 1:].reshape(-1, 1, 28, 28)
+            labels = torch.unsqueeze(train_set[:, 0], dim=1).to(device)
+            print(labels)
+            imgs, labels = imgs.to(device, dtype=torch.float32), labels.to(device, dtype = torch.long )
 
             loss = loss_fn(model(imgs), labels)
             optimizer.zero_grad()
@@ -90,19 +92,14 @@ model_train()
 
 
 # Calculating model accuracy
-def model_accuracy():
+def model_acc():
 
     tot_samples = 0
     tot_correct = 0
 
-    for imgs,labels in train_set:
-        imgs, labels = imgs.to(device), labels.to(device)
+    for batch in train_batches:
+        imgs = train_set[:,1:].reshape(-1,1,28,28) #Get batches of 28*28 pictures
 
-        _, predicted_label = model(imgs).max(1)
-        tot_correct += (predicted_label == labels).sum().item()
-        tot_samples += labels.size(0)
 
-    acc = tot_correct/tot_samples
-    print(f"Accuracy : {acc * 100}")
-#
+
 # model_train()
