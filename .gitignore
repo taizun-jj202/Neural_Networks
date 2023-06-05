@@ -3,3 +3,8 @@
 datasetMNIST
 Transfer_Learning
 datasets
+CIFAR10_CNN
+
+# Ignore weights and bias files
+*.pth
+*.pyc
