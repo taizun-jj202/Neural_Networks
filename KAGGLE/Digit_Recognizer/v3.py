@@ -83,16 +83,16 @@ def acc():
 
     print("---------------------------------------")
     print("Checking model accuracy...")
+    with torch.no_grad():
+        for sample in train_data:
+            imgs = sample[:, 1:].to(device, dtype=torch.long)
+            labels = sample[:, 0].to(device, dtype=torch.long)
 
-    for sample in train_data:
-        imgs = sample[:, 1:].to(device, dtype=torch.long)
-        labels = sample[:, 0].to(device, dtype=torch.long)
 
-
-        imgs = imgs.reshape(-1,1,28,28)
-        predicted = model(imgs).max(1)
-        tot_correct += (predicted == labels)
-        tot_samples += len(labels)
+            imgs = imgs.reshape(-1,1,28,28)
+            predicted = model(imgs).max(1)
+            tot_correct += (predicted == labels)
+            tot_samples += len(labels)
 
     acc = tot_correct/tot_samples
     print("Accuracy : {}".format(acc*100))
