@@ -46,7 +46,6 @@ test_loader = DataLoader(dataset=test_split,
                          batch_size=batch_size,
                          shuffle=True)
 
-
 # Neural Network model:
 class dig_rec(nn.Module):
     def __init__(self):
@@ -101,4 +100,4 @@ def train():
     print("---------------------------------------")
 
 
-train()
+# train()
