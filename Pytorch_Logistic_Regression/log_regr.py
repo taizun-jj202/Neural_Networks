@@ -11,6 +11,7 @@ import numpy as np
 from sklearn import datasets # Import binary classification dataset
 from sklearn.preprocessing import StandardScaler
 from sklearn.model_selection import train_test_split
+import tqdm as tqdm
 
 # 0) Prepare data
 bc = datasets.load_breast_cancer()
@@ -53,7 +54,7 @@ optimizer = torch.optim.Adam(model.parameters(), lr=learning_rate)
 
 # 3) training loop
 n_epochs = 80000
-
+'''
     # training loop
 for epoch in range(n_epochs):
     # forward pass
@@ -77,3 +78,6 @@ with torch.no_grad():
     y_predicted_cls = y_predicted.round()
     acc = y_predicted_cls.eq(ytest).sum() / float(ytest.shape[0])
     print(f"Accuracy = {acc:.4f}")
+'''
+tensor = torch.randn(1, 2, 1,4)
+print(tensor)
