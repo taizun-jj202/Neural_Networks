@@ -5,6 +5,8 @@ from torch.utils.data import DataLoader
 import torch.nn.functional as F
 import torchvision.datasets as datasets
 import torchvision.transforms as transforms
+import tqdm as tqdm
+
 
 # Setting model to GPU
 device = 'cuda' if torch.cuda.is_available() else 'cpu'
@@ -23,7 +25,7 @@ train_data = datasets.CIFAR10(root='./CIFAR10',
 test_data = datasets.CIFAR10(root='./CIFAR10',
                               transform=transforms.ToTensor(),
                               download=True,
-                              train=True)
+                              train=False)
     # Splitting data into batches using dataloaders
 train_loader = DataLoader( dataset=train_data,
                            batch_size=batch_size,
@@ -50,7 +52,7 @@ class CNN_CIFAR(nn.Module):
         self.pool1 = nn.MaxPool2d( kernel_size=(1,1), stride=(1,1))  # MaxPool to extract most prominent features of the image and also downsample image
         self.conv2 = nn.Conv2d( in_channels=9, out_channels=36,kernel_size=(3,3), stride=(1,1))
         self.pool2 = nn.MaxPool2d( kernel_size=(1,1), stride=(1,1))  # MaxPool to remove translation errors(i.e even in features move, to this that is not a concern
-        self.fc1 = nn.Linear(in_features=30*30*36,out_features= 972)
+        self.fc1 = nn.Linear(in_features=32400,out_features= 972) # 28*28*36
         self.fc2 = nn.Linear(in_features=972 , out_features=162)
         self.fc3 = nn.Linear(in_features=162 , out_features=10)
 
@@ -93,6 +95,7 @@ def train():
     print("...Executing model training...")
     print("------------------------------------")
     for epoch in range(num_epochs):
+
         for idx, (data, label) in enumerate(train_loader):
             data, label = data.to(device), label.to(device)
 
@@ -139,10 +142,11 @@ def validate():
 
 
 train()
-# torch.load("./cifar10.pth")
-validate()
+# # torch.load("./cifar10.pth")
+# validate()
 
 
+import pandas as pd
 
 
 

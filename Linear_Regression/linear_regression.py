@@ -2,6 +2,7 @@
 # Statistical model that tries to show the relationship between
 #     multiple/single input variables to find the value of 1 output variable
 import numpy as np
+import tqdm as tqdm
 
 class LinearRgr :
     def __init__(self, lr = 0.001, n_iters = 1000, ):

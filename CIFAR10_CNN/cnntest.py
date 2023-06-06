@@ -12,11 +12,11 @@ num_epochs = 4
 device = 'cuda' if torch.cuda.is_available() else 'cpu'
 
 # Load and split dataset
-train_dataset = datasets.CIFAR10(root='./dataCIFAR10',
+train_dataset = datasets.CIFAR10(root='./datasets',
                                  train=True,
                                  download=True,
                                  transform = transforms.ToTensor() )
-test_dataset = datasets.CIFAR10(root='./dataCIFAR10',
+test_dataset = datasets.CIFAR10(root='./datasets',
                                  train=False,
                                  download=True,
                                  transform = transforms.ToTensor() )
@@ -66,6 +66,7 @@ model = CNN_NET().to(device = device)
 print("---------------------------------")
 print("...Created instance of the model...")
 print("---------------------------------")
+print(train_dataset)
 
 # Optimizer and loss function for forward pass
 criterion = nn.CrossEntropyLoss()
@@ -125,8 +126,8 @@ def model_accuracy():
             class_accuracy = 100 * (n_class_corr[i]/n_class_samples[i])
             print(f"Accuracy of {classes[i]} Class == {class_accuracy}%")
         print("---------------------------------")
-
-model_train()
-model_accuracy()
+#
+# model_train()
+# model_accuracy()
 
 
