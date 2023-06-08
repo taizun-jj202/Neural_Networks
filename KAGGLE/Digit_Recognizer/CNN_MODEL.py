@@ -2,6 +2,7 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 from torch.utils.data import Dataset
+import pandas as pd
 
 class dig_rec(nn.Module):
     def __init__(self, batch_size):
@@ -62,24 +63,57 @@ class lineNN(nn.Module):
 
         return x
 
-class custom_call(Dataset):
+class custom_call1(Dataset):
     def __init__(self,img_df, label_df,dataset_csv):
         super().__init__() # Not necessary, adding this for base class initialization -> torch.utils.data.Dataset
-        self.dataset  = dataset_csv
-        self.img_df   = img_df
-        self.label_df = label_df
+        self.dataset = dataset_csv
+        self.img_df = dataset_csv.iloc[:, 1:]
+        self.label_df = dataset_csv.iloc[:, 0]
+        # self.img_df = img_df
+        # self.label_df = label_df
         # Coverting them to tensors
-        self.img_tnsr   = torch.tensor(self.img_df.values)
+        self.img_tnsr = torch.tensor(self.img_df.values)
         self.label_tnsr = torch.tensor(self.label_df.values)
 
     def __len__(self):
         return len(self.dataset)
 
 
-    def __getitem__(self,idx):
-        label = self.label_tnsr[idx]
-        img = self.img_tnsr[idx]
-        img = img.reshape(self.batch_size, 1, 28,28)
+    def __getitem__(self, idx):
+        label = self.label_tnsr[idx-2]
+        img = self.img_tnsr[idx-2]
+        img = img.reshape(-1, 1, 28,28)
         return label,img
+import torch
+from torch.utils.data import Dataset
+from PIL import Image
 
+class custom_call(Dataset):
+    def __init__(self, dataset_csv, transform=None):
+        super().__init__()
+        self.dataset = dataset_csv
+        self.img_df = dataset_csv.iloc[:, 1:]
+        self.label_df = dataset_csv.iloc[:, 0]
+        self.img_tnsr = torch.tensor(self.img_df.values, dtype=torch.float32)
+        self.label_tnsr = torch.tensor(self.label_df.values)
+        self.transform = transform
+
+    def __len__(self):
+        return len(self.dataset)
+
+    def __getitem__(self, idx):
+        label = self.label_tnsr[idx-2]
+        img = self.img_tnsr[idx-2]
+        img = img.reshape(28, 28)
+
+        # Convert tensor to PIL Image
+        img_pil = Image.fromarray(img.numpy(), mode='L')
+
+        if self.transform:
+            img_pil = self.transform(img_pil)
+
+        img_tensor = torch.tensor(img_pil)
+
+        img_tensor = img_tensor.unsqueeze(0)
+        return label, img_tensor
 
