@@ -3,7 +3,6 @@ import torch.nn as nn
 import torch.nn.functional as F
 from torch.utils.data import Dataset
 import pandas as pd
-from torchvision import transforms
 
 class custom_call(Dataset):
 
@@ -39,3 +38,4 @@ class nnmodel(nn.Module):
         x = self.fc4(x)
 
         return x
+
