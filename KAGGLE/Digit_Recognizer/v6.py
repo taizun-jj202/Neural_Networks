@@ -22,32 +22,46 @@ loss_fn = nn.CrossEntropyLoss()
 optimizer = torch.optim.SGD(model.parameters(), lr=0.001)
 
 # training loop
-print("... Training model ...")
-for i,l in train_loader:
-    i, l = i.to(device), l.to(device)
+def train():
+    print("... Training model ...")
+    for i,l in train_loader:
+        i, l = i.to(device), l.to(device)
 
-    output = model(i)
-    optimizer.zero_grad()
-    loss = loss_fn(output, l)
-    loss.backward()
-    optimizer.step()
-print("... Finished training ...")
+        output = model(i)
+        optimizer.zero_grad()
+        loss = loss_fn(output, l)
+        loss.backward()
+        optimizer.step()
+    print("... Finished training ...")
 
 # Finding accuracy of model
-tot_correct = 0
-tot_samples = 0
-print("Calculating accuracy of the model....")
-for i,la in test_loader:
-    i, la = i.to(device), la.to(device)
+def acc():
+    tot_correct = 0
+    tot_samples = 0
+    print("Calculating accuracy of the model....")
+    for i,la in test_loader:
+        i, la = i.to(device), la.to(device)
 
-    with torch.no_grad():
-        _, predicted = model(i).max(1)
-        tot_correct += (predicted == la).sum().item()
-        tot_samples += la.size(0)
+        with torch.no_grad():
+            _, predicted = model(i).max(1)
+            tot_correct += (predicted == la).sum().item()
+            tot_samples += la.size(0)
 
-acc = tot_correct/tot_samples
-print(f"Accuracy: {acc*100} %")
+    acc = tot_correct/tot_samples
+    print(f"Accuracy: {acc*100} %")
 
+def save():
+    torch.save(model.state_dict(), './v6_wb.pth')
+    print('... Saving the model weights ...')
+
+def load():
+    model.load_state_dict(torch.load('./v6_wb.pth'))
+    print("... Loading the model ...")
+
+# train()
+# save()
+load()
+acc()
 
 
 
