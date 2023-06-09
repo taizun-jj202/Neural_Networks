@@ -1,5 +1,4 @@
 import torch
-import torch.nn as nn
 import pandas as pd
 from torch.utils.data import random_split,DataLoader,Dataset
 from MODEL import *
